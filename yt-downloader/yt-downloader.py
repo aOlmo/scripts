@@ -38,7 +38,7 @@ for csv_f in csv_files:
         songs = pd.read_csv(csv_f_path)
     except:
         print("[-] Error while reading {} skipping this CSV".format(csv_f_path))
-        break
+        continue
     folder_name = csv_f.split('.')[0]
     total_songs = songs.shape[0]
     abs_path_save = os.getcwd()+"/"+dl_to+folder_name+"/"
