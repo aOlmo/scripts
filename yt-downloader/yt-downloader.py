@@ -40,7 +40,7 @@ for csv_f in csv_files:
     abs_path_save = os.getcwd()+"/"+dl_to+folder_name+"/"
 
     for i, row in songs.iterrows():
-        print("[+] Downloading song {}/{} for tracklist {}"
+        print("\n[+] Downloading song {}/{} for tracklist {}"
               .format(i+1, total_songs, folder_name))
 
         track = row['Track']
