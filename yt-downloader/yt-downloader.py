@@ -74,7 +74,7 @@ for csv_f in csv_files:
             url = 'https://www.youtube.com' + vid['href']
             print(url)
             # We get the first video on the list that is not an add
-            if "watch?v=" in url:
+            if "watch?v=" in url and not "googleadservices" in url:
                 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                     try:
                         ydl.download([url])
