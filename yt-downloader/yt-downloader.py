@@ -34,11 +34,16 @@ print("")
 for csv_f in csv_files:
     # Read CSV files and get list of tracks to download
     csv_f_path = csvs_folder+csv_f
-    songs = pd.read_csv(csv_f_path)
+    try:
+        songs = pd.read_csv(csv_f_path)
+    except:
+        print("[-] Error while reading {} skipping this CSV".format(csv_f_path))
+        break
     folder_name = csv_f.split('.')[0]
     total_songs = songs.shape[0]
     abs_path_save = os.getcwd()+"/"+dl_to+folder_name+"/"
 
+    print("================ DOWNLOADING {} PLAYLIST ================".format(folder_name))
     for i, row in songs.iterrows():
         print("\n[+] Downloading song {}/{} for tracklist {}"
               .format(i+1, total_songs, folder_name))
@@ -68,7 +73,7 @@ for csv_f in csv_files:
         for vid in soup.findAll(attrs={'class': 'yt-uix-tile-link'}):
             url = 'https://www.youtube.com' + vid['href']
             print(url)
-            # We get the first video on the list
+            # We get the first video on the list that is not an add
             if "watch?v=" in url:
                 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                     try:
@@ -78,6 +83,8 @@ for csv_f in csv_files:
                               .format(vid_name))
                         break
                 break
+
+    print("================ FINISHED {} PLAYLIST ================".format(folder_name))
 
 
 
