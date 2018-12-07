@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
             track = row['Track']
             artist = row['Artist']
-            vid_name = track +" "+ artist
+            vid_name = str(track)+" "+str(artist)
 
             print("\n[+] Downloading song {} -- {} {}/{}"
                   .format(vid_name, playlist, i+1, total_songs))
@@ -86,6 +86,6 @@ if __name__ == '__main__':
                                 create_dir(failed_folder)
                             print("\n\n[-] Failed to download {}. Continuing...".format(vid_name))
                             with open(failed_file, "a") as f:
-                                f.write(vid_name)
+                                f.write(vid_name+"\n")
                             break
                     break
