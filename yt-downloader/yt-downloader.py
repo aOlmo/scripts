@@ -39,18 +39,19 @@ for csv_f in csv_files:
     except:
         print("[-] Error while reading {} skipping this CSV".format(csv_f_path))
         continue
-    folder_name = csv_f.split('.')[0]
+    playlist = csv_f.split('.')[0]
     total_songs = songs.shape[0]
-    abs_path_save = os.getcwd()+"/"+dl_to+folder_name+"/"
+    abs_path_save = os.getcwd()+"/"+dl_to+playlist+"/"
 
-    print("================ DOWNLOADING {} PLAYLIST ================".format(folder_name))
+    print("================ DOWNLOADING {} PLAYLIST ================".format(playlist))
     for i, row in songs.iterrows():
-        print("\n[+] Downloading song {}/{} for tracklist {}"
-              .format(i+1, total_songs, folder_name))
 
         track = row['Track']
         artist = row['Artist']
         vid_name = track +" "+ artist
+
+        print("\n[+] Downloading song {} -- {} {}/{}"
+              .format(vid_name, playlist, i+1, total_songs))
 
         vid_query = vid_name.replace("\t"," ").replace(" ","+")
         r = requests.get("https://www.youtube.com/results?search_query={}".format(vid_query))
@@ -84,7 +85,7 @@ for csv_f in csv_files:
                         break
                 break
 
-    print("================ FINISHED {} PLAYLIST ================".format(folder_name))
+    print("================ FINISHED {} PLAYLIST ================".format(playlist))
 
 
 
